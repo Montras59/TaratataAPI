@@ -1,0 +1,23 @@
+main: fr.doctorwho.service.API
+name: DoctorWhoAPI
+version: 1.0 alpha
+authors: [Montras,Lasth]
+commands:
+    rank:
+        description: Vous permet de mettre les grades aux joueurs
+        aliases: grade 
+    money:
+        description: Vous permet de gérer votre argent
+        aliases: solde
+    ban:
+        description: Vous permet de gérer vos ban
+    tempban:
+        description: Vous permet de gérer vos ban
+    unban:
+        description: Vous permet de gérer vos ban
+    mute:
+        description: Vous permet de gérer vos mute
+    tempmute:
+        description: Vous permet de gérer vos mute
+    unmute:
+        description: Vous permet de gérer vos mute
