@@ -12,7 +12,7 @@ public enum EnumRank {
 	VIDEASTE(30, "videaste", "§8[§3Vidéaste§8] §3",ChatColor.DARK_AQUA), 
 	SCENARISTE(40, "scenariste", "§8[§eScénariste§8] §e",ChatColor.DARK_PURPLE), 
 	GRAPHISTE(50,"graphiste", "§8[§5Graphiste§8] §5",ChatColor.GREEN), 
-	GUIDE(60, "guide", "§8[§aGuide§8]§a",ChatColor.DARK_GREEN), 
+	GUIDE(60, "guide", "§8[§aGuide§8] §a",ChatColor.DARK_GREEN), 
 	BUILDER(65, "builder","§8[§6Builder§8] §6",ChatColor.GOLD), 
 	MODERATEUR(70, "moderateur","§8[§2Modérateur§8] §2",ChatColor.GOLD), 
 	DEVELOPPEUR(75,"developpeur","§8[§dDev§8] §d",ChatColor.LIGHT_PURPLE), 

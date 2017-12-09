@@ -22,7 +22,7 @@ public class PlayerJoin implements Listener {
 		
 		PunishBan(player, playersql);
 		
-		if(playersql.getRank() != EnumRank.JOUEUR) event.setJoinMessage(playersql.getRank().getRankPrefix() + " " + player.getName() + " à rejoint le serveur");
+		if(playersql.getRank() != EnumRank.JOUEUR) event.setJoinMessage(playersql.getRank().getRankPrefix() + player.getName() + " à rejoint le serveur");
 		else event.setJoinMessage(null);
 	}
 	
