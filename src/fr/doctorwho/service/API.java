@@ -36,6 +36,7 @@ public class API extends JavaPlugin {
 		instance = this;
 		
 		database = new Database();
+		database.connect();
 		
 		registerListener();
 		registerCommand();
