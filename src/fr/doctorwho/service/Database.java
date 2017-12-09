@@ -33,7 +33,7 @@ public class Database extends SQLConnection implements Runnable{
 	    try
 	    {
 		// get the file information
-		for(String line: FileUtils.readLines(new File("dbconnector.txt"))) {
+		for(String line: FileUtils.readLines(new File("/home/safety_data/dbconnector.txt"))) {
 		    
 		    // Put the line on a map and increment the key
 		    infoToConnection.put(i, line);
