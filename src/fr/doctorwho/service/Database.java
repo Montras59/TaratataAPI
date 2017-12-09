@@ -66,10 +66,6 @@ public class Database extends SQLConnection implements Runnable{
 		task = Bukkit.getScheduler().runTaskTimer(API.getInstance(), this, 0, 20 * 60 * 60);
 	}
 	
-	private static void connector() {
-	    
-	}
-	
 	
 	// reload every hour
 	@Override

@@ -5,7 +5,8 @@ import org.bukkit.ChatColor;
 // Rank List
 public enum EnumRank {
 
-	JOUEUR(0, "joueur", "§7",ChatColor.GRAY), 
+	JOUEUR(0, "joueur", "§7",ChatColor.GRAY),
+	ALPHA(5, "alpha", "§7[§aAplha§7] §7",ChatColor.GRAY), 
 	PREMIUM(10, "premium", "§7[§aPrenium§7] §7",ChatColor.GRAY), 
 	PREMIUMPLUS(20, "premiumPlus","§7[§bPrenium§d✩§7] §7",ChatColor.GRAY), 
 	VIDEASTE(30, "videaste", "§8[§3Vidéaste§8] §3",ChatColor.DARK_AQUA), 
@@ -20,7 +21,8 @@ public enum EnumRank {
 	RESPONSABLEMODO(82, "respmodo", "§8[§bResp.Modo§8] §b",ChatColor.AQUA), 
 	RESPONSABLEBUILD(83, "respbuild", "§8[§bResp.Build§8] §b",ChatColor.AQUA), 
 	RESPONSABLEDEV(84, "respdev", "§8[§bResp.Dev§8] §b",ChatColor.AQUA), 
-	CM(90, "community-manager","§8[§9C.Manager§8] §9",ChatColor.BLUE), 
+	CM(90, "community-manager","§8[§9C.Manager§8] §9",ChatColor.BLUE),
+	MANAGER(95, "manager","§8[§9Manager§8] §9",ChatColor.BLUE),
 	ADMINISTRATEUR(100, "administrateur", "§8[§cAdmin§8] §c",ChatColor.RED); 
 
 	int power;
