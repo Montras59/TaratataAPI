@@ -4,15 +4,21 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.plugin.messaging.PluginMessageListener;
 
-import fr.doctorwho.commands.BanCommand;
+import com.google.common.io.ByteArrayDataInput;
+import com.google.common.io.ByteStreams;
+
 import fr.doctorwho.commands.MoneyCommand;
-import fr.doctorwho.commands.MuteCommand;
 import fr.doctorwho.commands.RankCommand;
-import fr.doctorwho.commands.TempBanCommand;
-import fr.doctorwho.commands.TempMuteCommand;
-import fr.doctorwho.commands.UnBanCommand;
-import fr.doctorwho.commands.UnMuteCommand;
+import fr.doctorwho.commands.punish.BanCommand;
+import fr.doctorwho.commands.punish.MuteCommand;
+import fr.doctorwho.commands.punish.TempBanCommand;
+import fr.doctorwho.commands.punish.TempMuteCommand;
+import fr.doctorwho.commands.punish.UnBanCommand;
+import fr.doctorwho.commands.punish.UnMuteCommand;
+import fr.doctorwho.commands.server.HubCommand;
+import fr.doctorwho.commands.server.InstanceCommand;
 import fr.doctorwho.events.InventoryClick;
 import fr.doctorwho.events.PlayerChat;
 import fr.doctorwho.events.PlayerJoin;
@@ -21,7 +27,7 @@ import fr.doctorwho.events.PlayerQuit;
 
 
 /** To prepare the connection of the DataBase */
-public class API extends JavaPlugin {
+public class API extends JavaPlugin implements PluginMessageListener {
 
 	private static API instance;
 	private static Database database;
@@ -48,6 +54,9 @@ public class API extends JavaPlugin {
 			PlayerSQL playersql = PlayerSQL.getPlayerSQL(player);
 			PlayerSQL.playersql.put(player, playersql);
 		}
+		
+		this.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
+		this.getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", this);
 	}
 	
 	@Override
@@ -83,6 +92,21 @@ public class API extends JavaPlugin {
 		getCommand("mute").setExecutor(new MuteCommand());
 		getCommand("tempmute").setExecutor(new TempMuteCommand());
 		getCommand("unmute").setExecutor(new UnMuteCommand());
+		getCommand("hub").setExecutor(new HubCommand());
+		getCommand("instance").setExecutor(new InstanceCommand());
+	}
+	
+	@Override
+	public void onPluginMessageReceived(String channel, Player player, byte[] message) {
+		if (!channel.equals("BungeeCord")) {
+			return;
+		}
+		ByteArrayDataInput in = ByteStreams.newDataInput(message);
+		String subchannel = in.readUTF();
+		if (subchannel.equals("SomeSubChannel")) {
+			// Use the code sample in the 'Response' sections below to read
+			// the data.
+		}
 	}
 	
 	public static API getInstance(){

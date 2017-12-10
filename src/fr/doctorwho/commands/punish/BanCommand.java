@@ -1,4 +1,4 @@
-package fr.doctorwho.commands;
+package fr.doctorwho.commands.punish;
 
 import java.util.Date;
 
@@ -15,7 +15,7 @@ import fr.doctorwho.service.PlayerSQL;
 import fr.doctorwho.service.PunishSQL;
 import fr.doctorwho.utils.DateUnit;
 
-public class MuteCommand implements CommandExecutor {
+public class BanCommand implements CommandExecutor {
 
 	@SuppressWarnings("deprecation")
 	@Override
@@ -38,7 +38,7 @@ public class MuteCommand implements CommandExecutor {
 		if(args.length > 1){
 			OfflinePlayer target = Bukkit.getOfflinePlayer(args[0]);
 			String reason = getReason(args);
-			long end = System.currentTimeMillis() + DateUnit.getDate("m", 1);
+			long end = System.currentTimeMillis() + DateUnit.getDate("y", 1);
 			Date resultdate = new Date(end);
 			
 			if(target == null){
@@ -47,22 +47,27 @@ public class MuteCommand implements CommandExecutor {
 			}
 			
 			if(target == player){
-				player.sendMessage(EnumPrefix.DOCTORWHORP.getMessage() + "§cTu ne peux pas t'autoMute");
+				player.sendMessage(EnumPrefix.DOCTORWHORP.getMessage() + "§cTu ne peux pas t'autoBan");
 				return true;
 			}
 			
 			PunishSQL punish = new PunishSQL();
 			
-			if(punish.hasPunish(PlayerSQL.getPlayerSQL(target.getPlayer()), "mute")){
-				player.sendMessage(EnumPrefix.DOCTORWHORP.getMessage() + "§c" + target.getName() + " est déjà mute");
+			if(punish.hasPunish(PlayerSQL.getPlayerSQL(target.getPlayer()), "ban")){
+				player.sendMessage(EnumPrefix.DOCTORWHORP.getMessage() + "§c" + target.getName() + " est déjà banni");
 				return true;
 			}
 			
-			punish.create(player, PlayerSQL.getPlayerSQL(target.getPlayer()), "mute", reason, resultdate);
-			Bukkit.broadcastMessage(EnumPrefix.DOCTORWHORP.getMessage() + "§a" + player.getName() + " à mute " + target.getName() + " pour " + reason);
+			punish.create(player, PlayerSQL.getPlayerSQL(target.getPlayer()), "ban", reason, resultdate);
+			Bukkit.broadcastMessage(EnumPrefix.DOCTORWHORP.getMessage() + "§a" + player.getName() + " à banni " + target.getName() + " pour " + reason);
+			
+			if(target.isOnline()){
+				Player targetOnline = target.getPlayer();
+				targetOnline.kickPlayer("§aVous avez été ban pour:\n" + reason);
+			}
 			
 		}else{
-			player.sendMessage(EnumPrefix.DOCTORWHORP.getMessage() + "§a/mute <Player> <Raison>");
+			player.sendMessage(EnumPrefix.DOCTORWHORP.getMessage() + "§a/ban <Player> <Raison>");
 		}
 		return false;
 	}

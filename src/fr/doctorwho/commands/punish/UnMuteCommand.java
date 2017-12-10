@@ -1,4 +1,4 @@
-package fr.doctorwho.commands;
+package fr.doctorwho.commands.punish;
 
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;

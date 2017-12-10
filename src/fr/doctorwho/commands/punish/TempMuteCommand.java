@@ -1,4 +1,4 @@
-package fr.doctorwho.commands;
+package fr.doctorwho.commands.punish;
 
 import java.util.Date;
 

@@ -9,6 +9,7 @@ commands:
     money:
         description: Vous permet de gérer votre argent
         aliases: solde
+
     ban:
         description: Vous permet de gérer vos ban
     tempban:
@@ -21,3 +22,9 @@ commands:
         description: Vous permet de gérer vos mute
     unmute:
         description: Vous permet de gérer vos mute
+        
+    hub:
+        description: Téléportation au Hub
+        aliases: lobby
+    instance:
+        description: Téléportation au Instance    
