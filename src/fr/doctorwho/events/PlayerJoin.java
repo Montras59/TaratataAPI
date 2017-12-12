@@ -15,14 +15,11 @@ public class PlayerJoin implements Listener {
 	@EventHandler
 	public void onJoin(PlayerJoinEvent event){
 		Player player = event.getPlayer();
-		
-		PlayerSQL.createAccount(player);
 		PlayerSQL playersql = PlayerSQL.getPlayerSQL(player);
-		PlayerSQL.playersql.put(player, playersql);
 		
 		PunishBan(player, playersql);
 		
-		if(playersql.getRank() != EnumRank.JOUEUR) event.setJoinMessage(playersql.getRank().getRankPrefix() + player.getName() + " à rejoint le serveur");
+		if(playersql.getRank() != EnumRank.JOUEUR) event.setJoinMessage(playersql.getRank().getRankPrefix() + " " + player.getName() + " à rejoint le serveur");
 		else event.setJoinMessage(null);
 	}
 	
