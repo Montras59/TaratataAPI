@@ -18,27 +18,30 @@ public class PlayerSQL{
     	private EnumRank rank;
     	private int coins;	
     	private String quetes;
+    	private int lang;
 	// Map contenant le player ainsi que son SQL
 	public static Map<Player, PlayerSQL> playersql = new HashMap<Player, PlayerSQL>();
 
 	// Parametric Constructor
-	public PlayerSQL(int ID,String uuid, String pseudo, EnumRank rank,int coins,String quetes) {
+	public PlayerSQL(int ID,String uuid, String pseudo, EnumRank rank,int coins,String quetes,int lang) {
 		this.ID = ID;
 		this.uuid = uuid;
 		this.pseudo = pseudo;
 		this.rank = rank;
 		this.coins = coins;
 		this.quetes = quetes;
+		this.setLang(lang);
 	}
 		
 	// Non-Parametric Constructor
 	public PlayerSQL() {
 		super();
 	}
-	
-	
-	
-	
+	//This function will be execute has the first connection of a player
+	private static void firstConnection(Player p){
+		//execute la commande des choix de langue
+		p.performCommand("lang");
+	}
 	// create Player in the DB if does not exist. 
 	public static void createAccount(Player player)
 	{
@@ -51,6 +54,7 @@ public class PlayerSQL{
 			p.setString(3, player.getName());
 			p.execute();
 			p.close();
+			firstConnection(player);
 		}
 		
 		catch (SQLException e)
@@ -84,10 +88,24 @@ public class PlayerSQL{
 		
 			return false;
 		}
+	// Gets the existing data of the player
+	public static PlayerSQL getPlayerSQL(Player p){
+	    PlayerSQL ps = null;
+	    if(playersql.containsKey(p)){
+	        ps = getPlayerSQL_DB(p);
+	    }else{
+	    	ps = getPlayerSQL_DB(p);
+	        if(ps == null){
+	            createAccount(p);
+	            ps = getPlayerSQL_DB(p);
+	        }
+	    }
+	    return ps;
+	}
 	
 		// Gets the existing data of the player
-		public static PlayerSQL getPlayerSQL(Player player) {
-			PlayerSQL playersql = null;
+		public static PlayerSQL getPlayerSQL_DB(Player player) {
+			PlayerSQL playerSQL = null;
 			try {
 				PreparedStatement p = API.getDatabase().prepareStatement("SELECT * FROM players WHERE uuid = ?");
 				p.setString(1, player.getUniqueId().toString());
@@ -96,7 +114,8 @@ public class PlayerSQL{
 				
 				while(rs.next())
 				{
-					playersql = new PlayerSQL(rs.getInt("userID"),rs.getString("uuid"),player.getName(),EnumRank.getRank(rs.getInt("rank")), rs.getInt("coins"),rs.getString("quetes"));
+					playerSQL = new PlayerSQL(rs.getInt("userID"),rs.getString("uuid"),player.getName(),EnumRank.getRank(rs.getInt("rank")), rs.getInt("coins"),rs.getString("quetes"), rs.getInt("language"));
+					playersql.put(player, playerSQL);
 				}
 				
 				p.close();
@@ -107,19 +126,19 @@ public class PlayerSQL{
 				e.printStackTrace();
 			}
 			
-			return playersql;
+			return playerSQL;
 		}
 
 		// Update Player in the DB
 		public void update() {
 		    int num = 1;
 		    try {
-			PreparedStatement ps = API.getDatabase().prepareStatement("UPDATE players SET pseudo = ?, rank = ?, coins = ?,quetes = ? WHERE uuid = ?");
-				
+			PreparedStatement ps = API.getDatabase().prepareStatement("UPDATE players SET pseudo = ?, rank = ?, coins = ?,quetes = ?,language = ? WHERE uuid = ?");
 			ps.setString(num++, pseudo);
 			ps.setInt(num++, rank.getPower());
 			ps.setInt(num++, coins);
 			ps.setString(num++, quetes);
+			ps.setInt(num++, lang);
 			ps.setString(num++, uuid);
 			ps.executeUpdate();
 			ps.close();
@@ -139,6 +158,7 @@ public class PlayerSQL{
 
 		public void setID(int iD) {
 			ID = iD;
+			update();
 		}		
 
 		public String getUuid() {
@@ -147,6 +167,7 @@ public class PlayerSQL{
 
 		public void setUuid(String uuid) {
 			this.uuid = uuid;
+			update();
 		}
 
 		public String getPseudo() {
@@ -155,6 +176,7 @@ public class PlayerSQL{
 
 		public void setPseudo(String pseudo) {
 			this.pseudo = pseudo;
+			update();
 		}
 
 		public EnumRank getRank() {
@@ -163,10 +185,12 @@ public class PlayerSQL{
 
 		public void setRank(EnumRank rank) {
 			this.rank = rank;
+			update();
 		}
 		
 		public void setRank(int power){
 			this.rank = EnumRank.getRank(power);
+			update();
 		}
 
 		public int getCoins() {
@@ -175,15 +199,18 @@ public class PlayerSQL{
 
 		public void setCoins(int coins) {
 			this.coins = coins;
+			update();
 		}
 		
 		public void addCoins(int amount){
 			this.coins += amount;
+			update();
 		}
 		
 		public void removeCoins(int amount){
 			this.coins -= amount;
 			if(coins < 0) this.coins = 0;
+			update();
 		}
 
 		public String getQuetes() {
@@ -192,5 +219,15 @@ public class PlayerSQL{
 
 		public void setQuetes(String quetes) {
 			this.quetes = quetes;
+			update();
+		}
+
+		public int getLang() {
+			return lang;
+		}
+
+		public void setLang(int lang) {
+			this.lang = lang;
+			update();
 		}
 	}
