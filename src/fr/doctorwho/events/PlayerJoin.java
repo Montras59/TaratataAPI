@@ -17,6 +17,10 @@ public class PlayerJoin implements Listener {
 		Player player = event.getPlayer();
 		PlayerSQL playersql = PlayerSQL.getPlayerSQL(player);
 		
+		if(!playersql.isSelectLang()){
+			player.performCommand("lang");
+		}
+		
 		PunishBan(player, playersql);
 		
 		if(playersql.getRank() != EnumRank.JOUEUR) event.setJoinMessage(playersql.getRank().getRankPrefix() + " " + player.getName() + " à rejoint le serveur");
