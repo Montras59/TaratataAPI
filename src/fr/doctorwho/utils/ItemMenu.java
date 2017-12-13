@@ -8,6 +8,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.BannerMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
@@ -23,6 +24,7 @@ public abstract class ItemMenu
 	ItemStack stack;
 	ItemMeta meta;
 	SkullMeta skull;
+	BannerMeta banner;
 	
 	public ItemMenu(Material material,String title) {
 		this.material = material;
@@ -35,6 +37,11 @@ public abstract class ItemMenu
 			skull.setDisplayName(title);
 			setData(3);
 		}
+		if(material == Material.BANNER){
+			banner = (BannerMeta) stack.getItemMeta();
+			banner.setDisplayName(title);
+			addFlag(ItemFlag.HIDE_POTION_EFFECTS);
+		}
 		else{
 			meta = stack.getItemMeta();
 			meta.setDisplayName(title);
@@ -46,6 +53,7 @@ public abstract class ItemMenu
 	public void setLore(String... lore)
 	{
 		if(material == Material.SKULL_ITEM) skull.setLore(Arrays.asList(lore));
+		if(material == Material.BANNER) banner.setLore(Arrays.asList(lore));
 		else meta.setLore(Arrays.asList(lore));
 	}
 	
@@ -68,12 +76,14 @@ public abstract class ItemMenu
 	public void addFlag(ItemFlag flag)
 	{
 		if(material == Material.SKULL_ITEM) skull.addItemFlags(flag);
+		if(material == Material.BANNER) banner.addItemFlags(flag);
 		else meta.addItemFlags(flag);
 	}
 	
 	public ItemStack build()
 	{
 		if(material == Material.SKULL_ITEM) stack.setItemMeta(skull);
+		if(material == Material.BANNER) stack.setItemMeta(banner);
 		else stack.setItemMeta(meta);
 		return stack;
 	}
@@ -128,5 +138,13 @@ public abstract class ItemMenu
 
 	public void setSkull(SkullMeta skull) {
 		this.skull = skull;
+	}
+
+	public BannerMeta getBanner() {
+		return banner;
+	}
+
+	public void setBanner(BannerMeta banner) {
+		this.banner = banner;
 	}
 }
