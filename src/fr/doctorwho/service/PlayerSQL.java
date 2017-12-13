@@ -150,7 +150,13 @@ public class PlayerSQL{
 			e.printStackTrace();
 		    }
 		}
-		
+		//pour savoir si la lang a été select
+		public boolean isSelectLang(){
+			if(lang == 0){
+				return false;
+			}
+			return true;
+		}
 		// Getters & Setters
 		public int getID() {
 			return ID;
@@ -223,6 +229,10 @@ public class PlayerSQL{
 		}
 
 		public int getLang() {
+			if(lang == 0){
+				//quand la lang n'est pas select on renvoi la lang par default
+				return 1;
+			}
 			return lang;
 		}
 
