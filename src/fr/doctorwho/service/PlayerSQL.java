@@ -229,10 +229,6 @@ public class PlayerSQL{
 		}
 
 		public int getLang() {
-			if(lang == 0){
-				//quand la lang n'est pas select on renvoi la lang par default
-				return 1;
-			}
 			return lang;
 		}
 

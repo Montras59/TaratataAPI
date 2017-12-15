@@ -23,6 +23,7 @@ import fr.doctorwho.events.InventoryClick;
 import fr.doctorwho.events.PlayerChat;
 import fr.doctorwho.events.PlayerJoin;
 import fr.doctorwho.events.PlayerQuit;
+import fr.doctorwho.file.lang.LangFile;
 
 
 
@@ -31,7 +32,7 @@ public class API extends JavaPlugin implements PluginMessageListener {
 
 	private static API instance;
 	private static Database database;
-	
+	private static LangFile lang;
 	
 	public API() {
 		super();
@@ -46,6 +47,9 @@ public class API extends JavaPlugin implements PluginMessageListener {
 		
 		registerListener();
 		registerCommand();
+		
+		lang = new LangFile();
+		lang.load();
 		
 		if(Bukkit.getOnlinePlayers().size() == 0) return;
 		
@@ -123,6 +127,10 @@ public class API extends JavaPlugin implements PluginMessageListener {
 	
 	public static void setDatabase(Database database) {
 	    API.database = database;
+	}
+
+	public static LangFile getLang() {
+		return lang;
 	}
 
 
