@@ -27,4 +27,6 @@ commands:
         description: Téléportation au Hub
         aliases: lobby
     instance:
-        description: Téléportation au Instance    
+        description: Téléportation au Instance
+    lang:
+        description: Gestion de Lang

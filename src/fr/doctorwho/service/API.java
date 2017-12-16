@@ -9,6 +9,7 @@ import org.bukkit.plugin.messaging.PluginMessageListener;
 import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteStreams;
 
+import fr.doctorwho.commands.LangSelect;
 import fr.doctorwho.commands.MoneyCommand;
 import fr.doctorwho.commands.RankCommand;
 import fr.doctorwho.commands.punish.BanCommand;
@@ -98,6 +99,7 @@ public class API extends JavaPlugin implements PluginMessageListener {
 		getCommand("unmute").setExecutor(new UnMuteCommand());
 		getCommand("hub").setExecutor(new HubCommand());
 		getCommand("instance").setExecutor(new InstanceCommand());
+		getCommand("lang").setExecutor(new LangSelect(this));
 	}
 	
 	@Override
