@@ -29,11 +29,11 @@ public class LangSelect implements CommandExecutor {
 		}
 		switch(list[0]){
 			case "fr":
-				//ps.setLang(1);
+				ps.setLang(1);
 				p.sendMessage("§aVous avez choisi la langue française cela à bien été pris en compte.");
 				break;
 			case "en":
-				//ps.setLang(2);
+				ps.setLang(2);
 				p.sendMessage("§aYou chose the English language it in well taken into account.");
 				break;
 			default:

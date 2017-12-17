@@ -16,6 +16,8 @@ public abstract class InventoryVirtual {
 	private int size;
 	private Player player;
 	
+	public static Map<Integer, ItemMenu> itemPlayer = new HashMap<>();
+	
 	public InventoryVirtual(String title,int rows,Player player) {
 		this.title = title;
 		this.size = rows * 9;

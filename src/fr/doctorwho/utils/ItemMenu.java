@@ -1,8 +1,6 @@
 package fr.doctorwho.utils;
 
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -16,8 +14,6 @@ import org.bukkit.inventory.meta.SkullMeta;
 public abstract class ItemMenu 
 {
 	
-	private static Map<String, ItemMenu> itemsPlayer = new HashMap<>();
-
 	Material material;
 	String title;
 	
@@ -106,18 +102,6 @@ public abstract class ItemMenu
 
 	public ItemStack getStack() {
 		return stack;
-	}
-
-	public void addItemPlayer(){
-		itemsPlayer.put(title, this);
-	}
-	
-	public static Map<String, ItemMenu> getItemsPlayer() {
-		return itemsPlayer;
-	}
-
-	public static void setItemsPlayer(Map<String, ItemMenu> itemsPlayer) {
-		ItemMenu.itemsPlayer = itemsPlayer;
 	}
 
 	public void setStack(ItemStack stack) {
