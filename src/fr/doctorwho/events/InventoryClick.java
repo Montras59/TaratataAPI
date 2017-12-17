@@ -1,5 +1,6 @@
 package fr.doctorwho.events;
 
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -30,7 +31,8 @@ public class InventoryClick implements Listener {
 			InventoryVirtual.getVirtualMenu(inventory).getItems(slot).use(player);
 	    }
 	    
-	    event.setCancelled(true);
+	    if(player.getGameMode() == GameMode.CREATIVE) event.setCancelled(false);
+	    else event.setCancelled(true);
 	}
 	
 	@EventHandler
