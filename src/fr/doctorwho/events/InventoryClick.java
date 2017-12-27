@@ -32,14 +32,19 @@ public class InventoryClick implements Listener {
 		    InventoryVirtual.getVirtualMenu(inventory).getItems(slot) != null)
 	    {
 			InventoryVirtual.getVirtualMenu(inventory).getItems(slot).use(player);
+			if(player.getGameMode() == GameMode.CREATIVE && player.getInventory() == inventory) event.setCancelled(false);
+
+		    else event.setCancelled(true);
+			return;
 	    }
 	    
 	    if(PlayerInventoryVirtual.playerInventory.get(player) != null || PlayerInventoryVirtual.playerInventory.get(player).getItems(slot) != null){
 	    	PlayerInventoryVirtual.playerInventory.get(player).getItems(slot).use(player);
+	    	if(player.getGameMode() == GameMode.CREATIVE && player.getInventory() == inventory) event.setCancelled(false);
+
+		    else event.setCancelled(true);
+			return;
 	    }
-	    
-	    if(player.getGameMode() == GameMode.CREATIVE && player.getInventory() == inventory) event.setCancelled(false);
-	    else event.setCancelled(true);
 	}
 	
 	@EventHandler
