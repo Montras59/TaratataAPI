@@ -46,8 +46,8 @@ public class PunishSQL {
 	{
 		try
 		{
-			PreparedStatement p = API.getDatabase().prepareStatement("INSERT INTO punish(id,userID,owner,type,reason,end) VALUES (?,?,?,?,?,?)");
-			p.setInt(1, API.getDatabase().getAllID("punish", "ID") + 1);
+			PreparedStatement p = API.getDataBase().prepareStatement("INSERT INTO punish(id,userID,owner,type,reason,end) VALUES (?,?,?,?,?,?)");
+			p.setInt(1, API.getDataBase().getAllID("punish", "ID") + 1);
 			p.setInt(2, targetSQL.getID());
 			p.setString(3, owner.getName());
 			p.setString(4, type);
@@ -69,7 +69,7 @@ public class PunishSQL {
 	 */
 	public boolean hasPunish(PlayerSQL target,String type)
 	{
-		for(int x = 1; x < API.getDatabase().getAllID("punish", "ID") + 1; x++)
+		for(int x = 1; x < API.getDataBase().getAllID("punish", "ID") + 1; x++)
 		{
 			PunishSQL punish = getPunish(x);
 			if(punish.getUserID() == target.getID() && punish.getPunishType().equalsIgnoreCase(type)) return true;
@@ -87,7 +87,7 @@ public class PunishSQL {
 	{
 		try
 		{
-			PreparedStatement p = API.getDatabase().prepareStatement("DELETE FROM punish WHERE ID = ?");
+			PreparedStatement p = API.getDataBase().prepareStatement("DELETE FROM punish WHERE ID = ?");
 			p.setInt(1, ID);
 			p.executeUpdate();
 			p.close();
@@ -105,7 +105,7 @@ public class PunishSQL {
 	public PunishSQL getPunish(int ID){
 		PunishSQL punishsql = null;
 		try {
-			PreparedStatement p = API.getDatabase().prepareStatement("SELECT * FROM punish WHERE id = ?");
+			PreparedStatement p = API.getDataBase().prepareStatement("SELECT * FROM punish WHERE id = ?");
 			p.setInt(1, ID);
 			
 			ResultSet rs = p.executeQuery();

@@ -21,6 +21,7 @@ public class PlayerInventoryVirtual {
 		for(Integer slot : items.keySet()) player.getInventory().setItem(slot, items.get(slot).build());
 		
 		playerInventory.put(player, this);
+		player.updateInventory();
 	}
 	
 	public void addItem(Integer slot,ItemMenu menu){

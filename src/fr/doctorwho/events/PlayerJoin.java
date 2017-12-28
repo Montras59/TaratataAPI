@@ -38,7 +38,7 @@ public class PlayerJoin implements Listener {
 		if(!punish.hasPunish(sql, "ban")) return;
 		
 		
-		for(int x = 1; x < API.getDatabase().getAllID("punish", "ID") + 1; x++)
+		for(int x = 1; x < API.getDataBase().getAllID("punish", "ID") + 1; x++)
 		{
 			punish = punish.getPunish(x);
 			if(punish == null) continue;

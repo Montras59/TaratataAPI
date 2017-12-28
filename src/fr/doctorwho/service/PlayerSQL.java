@@ -48,8 +48,8 @@ public class PlayerSQL{
 		if (hasAccount(player))
 			return;
 		try {
-			PreparedStatement p = API.getDatabase().prepareStatement("INSERT INTO players(userID,uuid,pseudo) VALUES (?,?,?)");
-			p.setInt(1, API.getDatabase().getAllID("players","userID") + 1);
+			PreparedStatement p = API.getDataBase().prepareStatement("INSERT INTO players(userID,uuid,pseudo) VALUES (?,?,?)");
+			p.setInt(1, API.getDataBase().getAllID("players","userID") + 1);
 			p.setString(2, player.getUniqueId().toString());
 			p.setString(3, player.getName());
 			p.execute();
@@ -66,7 +66,7 @@ public class PlayerSQL{
 	// Check if Player already exist
 	private static boolean hasAccount(Player player) {
 		try {
-			PreparedStatement p = API.getDatabase().prepareStatement("SELECT uuid FROM players WHERE uuid = ?");
+			PreparedStatement p = API.getDataBase().prepareStatement("SELECT uuid FROM players WHERE uuid = ?");
 			p.setString(1, player.getUniqueId().toString());
 			
 			ResultSet rs = p.executeQuery();
@@ -107,7 +107,7 @@ public class PlayerSQL{
 		public static PlayerSQL getPlayerSQL_DB(Player player) {
 			PlayerSQL playerSQL = null;
 			try {
-				PreparedStatement p = API.getDatabase().prepareStatement("SELECT * FROM players WHERE uuid = ?");
+				PreparedStatement p = API.getDataBase().prepareStatement("SELECT * FROM players WHERE uuid = ?");
 				p.setString(1, player.getUniqueId().toString());
 				
 				ResultSet rs = p.executeQuery();
@@ -133,7 +133,7 @@ public class PlayerSQL{
 		public void update() {
 		    int num = 1;
 		    try {
-			PreparedStatement ps = API.getDatabase().prepareStatement("UPDATE players SET pseudo = ?, rank = ?, coins = ?,quetes = ?,language = ? WHERE uuid = ?");
+			PreparedStatement ps = API.getDataBase().prepareStatement("UPDATE players SET pseudo = ?, rank = ?, coins = ?,quetes = ?,language = ? WHERE uuid = ?");
 			ps.setString(num++, pseudo);
 			ps.setInt(num++, rank.getPower());
 			ps.setInt(num++, coins);

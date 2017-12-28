@@ -3,6 +3,7 @@ package fr.doctorwho.utils;
 import java.util.Arrays;
 
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -36,7 +37,6 @@ public abstract class ItemMenu
 		if(material == Material.BANNER){
 			banner = (BannerMeta) stack.getItemMeta();
 			banner.setDisplayName(title);
-			addFlag(ItemFlag.HIDE_POTION_EFFECTS);
 		}
 		else{
 			meta = stack.getItemMeta();
@@ -63,16 +63,18 @@ public abstract class ItemMenu
 		stack.setDurability((short) data);
 	}
 	
-	@SuppressWarnings("deprecation")
-	public void setOwner(Player player)
+	public void setOwner(String player)
 	{
-		skull.setOwner(player.getName());
+		skull.setOwner(player);
+	}
+	
+	public void addEnchant(Enchantment enchant, int level){
+		stack.addEnchantment(enchant, level);
 	}
 	
 	public void addFlag(ItemFlag flag)
 	{
 		if(material == Material.SKULL_ITEM) skull.addItemFlags(flag);
-		if(material == Material.BANNER) banner.addItemFlags(flag);
 		else meta.addItemFlags(flag);
 	}
 	

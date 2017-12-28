@@ -123,7 +123,7 @@ public class API extends JavaPlugin implements PluginMessageListener {
 	    API.instance = instance;
 	}
 		
-	public static Database getDatabase() {
+	public static Database getDataBase() {
 	    return database;
 	}
 	
