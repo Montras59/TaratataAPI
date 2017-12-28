@@ -29,11 +29,11 @@ public class LangSelect implements CommandExecutor {
 		}
 		switch(list[0]){
 			case "fr":
-				ps.setLang(1);
+				ps.setLang(0);
 				p.sendMessage("§aVous avez choisi la langue française cela à bien été pris en compte.");
 				break;
 			case "en":
-				ps.setLang(2);
+				ps.setLang(1);
 				p.sendMessage("§aYou chose the English language it in well taken into account.");
 				break;
 			default:
@@ -44,7 +44,7 @@ public class LangSelect implements CommandExecutor {
 	}
 	//message par default
 	private void messageTellraw(Player p){
-		p.sendMessage("§6§nLangue §o(Language)§6§n:");
+		p.sendMessage("§eVous pouvez sélectionner une Langue dans le menu §4\"Paramètre\"§e ou en cliquant dessous:");
 		Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "tellraw "+p.getName()+" [\"\",{\"text\":\" \",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/lang fr\"},\"hoverEvent\":{\"action\":\"show_text\",\"value\":\"Langue Française\"}},{\"text\":\"-FR:\",\"color\":\"aqua\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/lang fr\"},\"hoverEvent\":{\"action\":\"show_text\",\"value\":\"Langue Française\"}},{\"text\":\"Clic sur ce message si tu veux les textes en français.\",\"color\":\"light_purple\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/lang fr\"},\"hoverEvent\":{\"action\":\"show_text\",\"value\":\"Langue Française\"}}]");
 		Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "tellraw "+p.getName()+" [\"\",{\"text\":\" \",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/lang en\"},\"hoverEvent\":{\"action\":\"show_text\",\"value\":\"Language English\"}},{\"text\":\"-EN:\",\"color\":\"aqua\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/lang en\"},\"hoverEvent\":{\"action\":\"show_text\",\"value\":\"Language English\"}},{\"text\":\"Click on this message if you want texts in English.\",\"color\":\"light_purple\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/lang en\"},\"hoverEvent\":{\"action\":\"show_text\",\"value\":\"Language English\"}}]");
 	}
