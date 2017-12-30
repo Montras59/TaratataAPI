@@ -1,6 +1,5 @@
 package fr.doctorwho.commands;
 
-import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -8,6 +7,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
 import fr.doctorwho.service.PlayerSQL;
+import fr.doctorwho.utils.ChatCompenent;
+import net.md_5.bungee.api.chat.ClickEvent.Action;
 
 public class LangSelect implements CommandExecutor {
 	private Plugin plugin;
@@ -45,9 +46,16 @@ public class LangSelect implements CommandExecutor {
 	//message par default
 	private void messageTellraw(Player p){
 		p.sendMessage("§eVous pouvez sélectionner une Langue dans le menu §4\"Paramètre\"§e ou en cliquant dessous:");
-		Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "tellraw "+p.getName()+" [\"\",{\"text\":\" \",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/lang fr\"},\"hoverEvent\":{\"action\":\"show_text\",\"value\":\"Langue Française\"}},{\"text\":\"-FR:\",\"color\":\"aqua\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/lang fr\"},\"hoverEvent\":{\"action\":\"show_text\",\"value\":\"Langue Française\"}},{\"text\":\"Clic sur ce message si tu veux les textes en français.\",\"color\":\"light_purple\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/lang fr\"},\"hoverEvent\":{\"action\":\"show_text\",\"value\":\"Langue Française\"}}]");
-		Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "tellraw "+p.getName()+" [\"\",{\"text\":\" \",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/lang en\"},\"hoverEvent\":{\"action\":\"show_text\",\"value\":\"Language English\"}},{\"text\":\"-EN:\",\"color\":\"aqua\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/lang en\"},\"hoverEvent\":{\"action\":\"show_text\",\"value\":\"Language English\"}},{\"text\":\"Click on this message if you want texts in English.\",\"color\":\"light_purple\",\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/lang en\"},\"hoverEvent\":{\"action\":\"show_text\",\"value\":\"Language English\"}}]");
+	
+		ChatCompenent fr = new ChatCompenent("§e- §dFrançais/French §e: §aCliquez sur ce message pour avoir les §atextes en français", p);
+		fr.setEvent(Action.RUN_COMMAND, "/lang fr");
+		fr.sendMessage();
+		
+		ChatCompenent en = new ChatCompenent("§e- §dAnglais/English §e: §aClick on this message to have the texts in §aEnglish", p);
+		en.setEvent(Action.RUN_COMMAND, "/lang en");
+		en.sendMessage();
 	}
+	
 	public Plugin getPlugin() {
 		return plugin;
 	}
