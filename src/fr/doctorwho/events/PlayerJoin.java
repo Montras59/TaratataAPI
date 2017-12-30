@@ -6,6 +6,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
+import fr.doctorwho.bossbar.BossBarPlayer;
 import fr.doctorwho.enums.EnumRank;
 import fr.doctorwho.service.API;
 import fr.doctorwho.service.PlayerSQL;
@@ -22,6 +23,8 @@ public class PlayerJoin implements Listener {
 		
 		if(playersql.getRank() != EnumRank.JOUEUR) event.setJoinMessage(playersql.getRank().getRankPrefix() + " " + player.getName() + " à rejoint le serveur");
 		else event.setJoinMessage(null);
+		
+		new BossBarPlayer(player);
 	}
 	
 	

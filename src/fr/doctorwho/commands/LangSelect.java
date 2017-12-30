@@ -45,7 +45,7 @@ public class LangSelect implements CommandExecutor {
 	}
 	//message par default
 	private void messageTellraw(Player p){
-		p.sendMessage("§eVous pouvez sélectionner une Langue dans le menu §4\"Paramètre\"§e ou en cliquant dessous:");
+		p.sendMessage("§eVous pouvez sélectionner une Langue dans le menu §4\"Menu Principal\"§e ou en cliquant ci-dessous:");
 	
 		ChatCompenent fr = new ChatCompenent("§e- §dFrançais/French §e: §aCliquez sur ce message pour avoir les §atextes en français", p);
 		fr.setEvent(Action.RUN_COMMAND, "/lang fr");

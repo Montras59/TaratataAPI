@@ -9,6 +9,7 @@ import org.bukkit.plugin.messaging.PluginMessageListener;
 import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteStreams;
 
+import fr.doctorwho.bossbar.BossBarFile;
 import fr.doctorwho.commands.LangSelect;
 import fr.doctorwho.commands.MoneyCommand;
 import fr.doctorwho.commands.RankCommand;
@@ -34,6 +35,7 @@ public class API extends JavaPlugin implements PluginMessageListener {
 	private static API instance;
 	private static Database database;
 	private static LangFile lang;
+	private static BossBarFile bossbar;
 	
 	public API() {
 		super();
@@ -51,6 +53,8 @@ public class API extends JavaPlugin implements PluginMessageListener {
 		
 		lang = new LangFile();
 		lang.load();
+		
+		bossbar = new BossBarFile();
 		
 		if(Bukkit.getOnlinePlayers().size() == 0) return;
 		
@@ -135,8 +139,11 @@ public class API extends JavaPlugin implements PluginMessageListener {
 		return lang;
 	}
 
+	public static BossBarFile getBossbar() {
+		return bossbar;
+	}
 
-	
-	
-	
+	public static void setBossbar(BossBarFile bossbar) {
+		API.bossbar = bossbar;
+	}
 }
