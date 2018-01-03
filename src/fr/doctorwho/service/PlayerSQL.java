@@ -17,7 +17,8 @@ public class PlayerSQL {
 	private String pseudo;
 	private EnumRank rank;
 	private int coins;
-	private String quetes;
+	private String season;
+	private String quete;
 	private int lang;
 	private String friends;
 	// Map contenant le player ainsi que son SQL
@@ -31,7 +32,8 @@ public class PlayerSQL {
 		this.pseudo = pseudo;
 		this.rank = rank;
 		this.coins = coins;
-		this.quetes = quetes;
+		this.season = quetes.split(",")[0];
+		this.quete = quetes.split(",")[1];
 		this.setLang(lang);
 		this.friends = friends;
 	}
@@ -140,7 +142,7 @@ public class PlayerSQL {
 			ps.setString(num++, pseudo);
 			ps.setInt(num++, rank.getPower());
 			ps.setInt(num++, coins);
-			ps.setString(num++, quetes);
+			ps.setString(num++, season + "," + quete);
 			ps.setInt(num++, lang);
 			ps.setString(num++, friends);
 			ps.setString(num++, uuid);
@@ -225,13 +227,20 @@ public class PlayerSQL {
 		update();
 	}
 
-	public String getQuetes() {
-		return quetes;
+	public String getSeason() {
+		return season;
 	}
 
-	public void setQuetes(String quetes) {
-		this.quetes = quetes;
-		update();
+	public void setSeason(String season) {
+		this.season = season;
+	}
+
+	public String getQuete() {
+		return quete;
+	}
+
+	public void setQuete(String quete) {
+		this.quete = quete;
 	}
 
 	public int getLang() {
