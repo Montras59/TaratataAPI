@@ -1,5 +1,8 @@
 package fr.doctorwho.bossbar;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.Bukkit;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarFlag;
@@ -12,6 +15,8 @@ import fr.doctorwho.service.API;
 
 public class BossBarPlayer implements Runnable{
 
+	public static List<BossBar> bossbars = new ArrayList<>();
+	
 	private BukkitTask task;
 	
 	private Player player;
@@ -21,9 +26,10 @@ public class BossBarPlayer implements Runnable{
 	
 	public BossBarPlayer(Player player) {
 		this.player = player;
-		this.bossbar = Bukkit.createBossBar(API.getBossbar().getMessage(number), BarColor.BLUE, BarStyle.SEGMENTED_20, BarFlag.DARKEN_SKY);
+		this.bossbar = Bukkit.createBossBar(API.getBossbar().getMessage(number), BarColor.BLUE, BarStyle.SOLID, BarFlag.DARKEN_SKY);
 		bossbar.addPlayer(player);
-		this.task = Bukkit.getScheduler().runTaskTimer(API.getInstance(), this, 0, 2);
+		bossbars.add(bossbar);
+		this.task = Bukkit.getScheduler().runTaskTimer(API.getInstance(), this, 0, 1);
 	}
 
 	@Override

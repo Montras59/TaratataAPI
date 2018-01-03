@@ -1,6 +1,7 @@
 package fr.doctorwho.service;
 
 import org.bukkit.Bukkit;
+import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -10,6 +11,7 @@ import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteStreams;
 
 import fr.doctorwho.bossbar.BossBarFile;
+import fr.doctorwho.bossbar.BossBarPlayer;
 import fr.doctorwho.commands.LangSelect;
 import fr.doctorwho.commands.MoneyCommand;
 import fr.doctorwho.commands.RankCommand;
@@ -74,6 +76,10 @@ public class API extends JavaPlugin implements PluginMessageListener {
 		
 		for(Player player : Bukkit.getOnlinePlayers()){
 			PlayerSQL.playersql.get(player).update();
+		}
+		
+		for(BossBar bossBar : BossBarPlayer.bossbars){
+			bossBar.removeAll();
 		}
 		
 		database.disconnect();
