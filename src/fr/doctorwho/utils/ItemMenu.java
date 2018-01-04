@@ -2,6 +2,7 @@ package fr.doctorwho.utils;
 
 import java.util.Arrays;
 
+import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -9,6 +10,7 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BannerMeta;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
 // Create Item
@@ -20,6 +22,7 @@ public abstract class ItemMenu
 	
 	ItemStack stack;
 	ItemMeta meta;
+	LeatherArmorMeta leather;
 	SkullMeta skull;
 	BannerMeta banner;
 	
@@ -38,6 +41,10 @@ public abstract class ItemMenu
 			banner = (BannerMeta) stack.getItemMeta();
 			banner.setDisplayName(title);
 		}
+		if(material == Material.LEATHER_CHESTPLATE || material == Material.LEATHER_BOOTS || material == Material.LEATHER_HELMET || material == Material.LEATHER_LEGGINGS){
+			leather = (LeatherArmorMeta) stack.getItemMeta();
+			leather.setDisplayName(title);
+		}
 		else{
 			meta = stack.getItemMeta();
 			meta.setDisplayName(title);
@@ -50,6 +57,7 @@ public abstract class ItemMenu
 	{
 		if(material == Material.SKULL_ITEM) skull.setLore(Arrays.asList(lore));
 		if(material == Material.BANNER) banner.setLore(Arrays.asList(lore));
+		if(material == Material.LEATHER_CHESTPLATE || material == Material.LEATHER_BOOTS || material == Material.LEATHER_HELMET || material == Material.LEATHER_LEGGINGS) leather.setLore(Arrays.asList(lore));
 		else meta.setLore(Arrays.asList(lore));
 	}
 	
@@ -68,6 +76,10 @@ public abstract class ItemMenu
 		skull.setOwner(player);
 	}
 	
+	public void setColor(Color color){
+		if(material == Material.LEATHER_CHESTPLATE || material == Material.LEATHER_BOOTS || material == Material.LEATHER_HELMET || material == Material.LEATHER_LEGGINGS) leather.setColor(color);
+	}
+	
 	public void addEnchant(Enchantment enchant, int level){
 		stack.addEnchantment(enchant, level);
 	}
@@ -82,6 +94,7 @@ public abstract class ItemMenu
 	{
 		if(material == Material.SKULL_ITEM) stack.setItemMeta(skull);
 		if(material == Material.BANNER) stack.setItemMeta(banner);
+		if(material == Material.LEATHER_CHESTPLATE || material == Material.LEATHER_BOOTS || material == Material.LEATHER_HELMET || material == Material.LEATHER_LEGGINGS) stack.setItemMeta(leather);
 		else stack.setItemMeta(meta);
 		return stack;
 	}

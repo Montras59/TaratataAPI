@@ -142,7 +142,7 @@ public class PlayerSQL {
 			ps.setString(num++, pseudo);
 			ps.setInt(num++, rank.getPower());
 			ps.setInt(num++, coins);
-			ps.setString(num++, season + "," + quete);
+			ps.setString(num++, season + "," + quete + ",");
 			ps.setInt(num++, lang);
 			ps.setString(num++, friends);
 			ps.setString(num++, uuid);
